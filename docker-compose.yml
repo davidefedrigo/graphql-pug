@@ -1,0 +1,32 @@
+version: "3.1"
+services:
+
+    mysql:
+      image: mysql:8.0
+      working_dir: /application
+      volumes:
+        - .:/application
+      environment:
+        - MYSQL_ROOT_PASSWORD=dbrootpw
+        - MYSQL_DATABASE=pugmi_graphql_php
+        - MYSQL_USER=dbuser
+        - MYSQL_PASSWORD=dbpw
+      ports:
+        - "8002:3306"
+
+    webserver:
+      image: nginx:alpine
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8000:80"
+
+    php-fpm:
+      build: docker/php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+
