@@ -5,7 +5,7 @@ namespace App\GraphQL\Type;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
-class Reservation extends ObjectType
+class Article extends ObjectType
 {
     public function __construct()
     {

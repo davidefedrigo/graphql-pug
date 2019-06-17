@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\GraphQL\Type\Reservation;
+use App\GraphQL\Type\Article;
 use GraphQL\GraphQL;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
@@ -37,7 +37,7 @@ class GraphqlController extends AbstractController
                     }
                 ],
                 'reservations' => [
-                    'type' => Type::listOf(new Reservation()),
+                    'type' => Type::listOf(new Article()),
                     'resolve' => function($a) {
                         return [
                             [
