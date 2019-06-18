@@ -56,7 +56,7 @@ class GraphqlController extends AbstractController
         $schema = new \GraphQL\Type\Schema([
             'query' => $queryType
         ]);
-        
+
         try {
             $rootValue = ['user' => 'user 1'];
             $result = GraphQL::executeQuery($schema, $query, $rootValue, null, $variableValues);
