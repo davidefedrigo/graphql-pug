@@ -11,6 +11,22 @@ class: center, middle
 
 Never done it before!
 
+_(in php)_
+
+---
+
+# Agenda
+
+- PHP libraries
+- Tooling
+- Intro to GraphQL concepts (tipi, fields, query e mutation)
+- (minimal implementation)
+
+
+- Coding
+  - Variables
+  - ...
+  
 ---
 
 # PHP libraries

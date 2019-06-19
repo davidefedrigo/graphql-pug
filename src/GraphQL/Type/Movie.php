@@ -11,7 +11,8 @@ class Movie extends ObjectType
     {
         $config = [
             'fields' => [
-                'id' => Type::id()
+                'id' => Type::id(),
+                'title' => Type::string()
             ],
         ];
         parent::__construct($config);

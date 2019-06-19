@@ -81,7 +81,13 @@ class GraphqlController extends AbstractController
     public function index()
     {
         $query = "query {
-  me
+  me {
+    firstName
+    watchList {
+    id
+    title
+    }
+  }
   movies{id}
 }";
 // movies(title: "back"){id}
@@ -138,7 +144,7 @@ class GraphqlController extends AbstractController
 //        ]);
 
         try {
-            $rootValue = ['user' => 'user 1'];
+            $rootValue = ['user_first_name' => 'Davide'];
             $result = GraphQL::executeQuery(new Schema(), $query, $rootValue, null, $variableValues);
             $output = $result->toArray();
         } catch (\Exception $e) {
