@@ -9,6 +9,7 @@ use GraphQL\GraphQL;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GraphqlController extends AbstractController
@@ -77,19 +78,25 @@ class GraphqlController extends AbstractController
 
     /**
      * @Route("/graphql", name="graphql")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = "query {
-  me {
-    firstName
-    watchList {
-    id
-    title
-    }
-  }
-  movies{id}
-}";
+//        $query = "query {
+//  me {
+//    firstName
+//    watchList {
+//    id
+//    title
+//    }
+//  }
+//  movies{id, title}
+//}";
+        $data = json_decode($request->getContent(), true);
+        $query = $data['query'];
+        //var_dump($query);
+        //die;
 // movies(title: "back"){id}
 
 //        me {
@@ -145,7 +152,7 @@ class GraphqlController extends AbstractController
 
         try {
             $rootValue = ['user_first_name' => 'Davide'];
-            $result = GraphQL::executeQuery(new Schema(), $query, $rootValue, null, $variableValues);
+            $result = GraphQL::executeQuery(new Schema(), $data['query'], $rootValue, null, $variableValues);
             $output = $result->toArray();
         } catch (\Exception $e) {
             $output = [
