@@ -22,7 +22,6 @@ class Director
     public $country;
 
     /**
-     * Director constructor.
      * @param $id
      * @param string $name
      * @param string $country

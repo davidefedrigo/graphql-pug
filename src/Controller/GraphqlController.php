@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Domain\User;
+use App\GraphQL\Context;
 use App\GraphQL\Schema;
 use App\GraphQL\Type\Book;
 use App\GraphQL\Type\Movie;
+use GraphQL\Error\Debug;
 use GraphQL\GraphQL;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
@@ -119,7 +122,7 @@ class GraphqlController extends AbstractController
 //    }
 //        }
 
-        $variableValues = null;
+        $variables = isset($data['variables']) ? $data['variables'] : null;
 
 //        $queryType = new ObjectType([
 //            'name' => 'Query',
@@ -152,8 +155,10 @@ class GraphqlController extends AbstractController
 
         try {
             $rootValue = ['user_first_name' => 'Davide'];
-            $result = GraphQL::executeQuery(new Schema(), $data['query'], $rootValue, null, $variableValues);
-            $output = $result->toArray();
+            $context = new Context(new User());
+            $result = GraphQL::executeQuery(new Schema(), $data['query'], $rootValue, $context, $variables);
+            $debug = Debug::INCLUDE_DEBUG_MESSAGE | Debug::INCLUDE_TRACE;
+            $output = $result->toArray($debug   );
         } catch (\Exception $e) {
             $output = [
                 'errors' => [

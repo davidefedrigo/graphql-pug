@@ -11,7 +11,8 @@ class Actor extends ObjectType
     {
         $config = [
             'fields' => [
-                'id' => Type::id()
+                'id' => Type::id(),
+                'name' => Type::string()
             ],
         ];
         parent::__construct($config);

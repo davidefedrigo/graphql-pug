@@ -32,6 +32,9 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "lstrojny/functional-php": {
+        "version": "1.9.0"
+    },
     "nikic/php-parser": {
         "version": "v4.2.2"
     },
