@@ -47,8 +47,10 @@
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
-						#### Discalaimer
+						### Discalaimer
 						Never done it before!
+
+						_(using PHP)_<!-- .element: class="fragment" data-fragment-index="0" -->
 					</script>
 					<aside class="notes">
 							
@@ -93,7 +95,10 @@ type {
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
+				],
+				// Add the current slide number to the URL hash so that reloading the
+				// page/copying the URL will return you to the same slide
+				hash: true,
 			});
 		</script>
 	</body>
