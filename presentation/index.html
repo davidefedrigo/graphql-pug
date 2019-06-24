@@ -27,8 +27,9 @@
 			<div class="slides">
 				<section data-markdown data-background-image="img/copertina.jpg">
 					<textarea data-template>
-							### Building my first GraphQL server using PHP
-						</textarea>
+						### Building my first GraphQL server in PHP
+						@davidefedrigo
+					</textarea>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
@@ -47,26 +48,53 @@
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
-						### Discalaimer
+						### Disclaimer
 						Never done it before!
 
 						_(using PHP)_<!-- .element: class="fragment" data-fragment-index="0" -->
 					</script>
-					<aside class="notes">
-							
-						</aside>
+					<aside class="notes"></aside>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<textarea data-template>
-						## Page title
-				
-						```
-type {
-	pluto: String!
-}
-```
+						GraphQL has been released only as a specification.
+						<aside class="notes">
+							Solo un lungo documento che descrive comportamento si un GL server.
+
+							Linguaggio indifferente.
+							
+							In ogni linguaggio stessi concetti.
+						</aside>
 					</textarea>
 				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<textarea data-template>
+
+							A GraphQL service is created by defining types and fields on those types.
+
+							```
+							type Query {
+								me: User
+							}
+							
+							type User {
+								id: ID
+								name: String
+							}
+							```
+							
+							Along with functions for each field on each type.
+					</textarea>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					#### Client-Server Interaction
+					![Client Server Interaction](img/client-server-interaction.png)
+
+					<aside class="notes">Most of our time will be spent focusing on how to define our GraphQL schema and tie it to our application business logic, and that’s what we will move on to next.</aside>
+					</script>
+				</section>
+				
 				<section data-markdown>
 					<script type="text/template">
 						asdasda
