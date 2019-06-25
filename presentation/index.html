@@ -68,22 +68,56 @@
 					</textarea>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+						## Meet GraphQL
+					</script>
+					<aside class="notes"></aside>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					A GraphQL service is created by defining types
+
+					and fields on those types
+
+					```
+					type Query {
+						randomMovie: Movie!
+					}
+
+					type Movie {
+						id: ID
+						title: String
+					}
+					```
+
+					Along with functions for each field on each type<!-- .element: class="fragment" data-fragment-index="0" -->
+					<aside class="notes">
+						- GraphQL schema language
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
 					<textarea data-template>
-
-							A GraphQL service is created by defining types and fields on those types.
+							GraphQL Query
 
 							```
-							type Query {
-								me: User
-							}
-							
-							type User {
-								id: ID
-								name: String
+							{
+								randomMovie {
+									title
+								}
 							}
 							```
 							
-							Along with functions for each field on each type.
+							JSON Result
+							```
+							{
+								"data": {
+									"randomMovie": {
+										"title": "Back to the Future"
+									}
+								}
+							}
+							```
 					</textarea>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
@@ -94,18 +128,17 @@
 					<aside class="notes">Most of our time will be spent focusing on how to define our GraphQL schema and tie it to our application business logic, and that’s what we will move on to next.</aside>
 					</script>
 				</section>
-				
-				<section data-markdown>
+				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
-						asdasda
-						- Item 1 <!-- .element: class="fragment" data-fragment-index="0" -->
-						- Item 2 <!-- .element: class="fragment" data-fragment-index="1" -->
-					</script>
-				</section>
-				<section data-markdown>
-					<script type="text/template">
-					<!-- .slide: data-background="#ff0000" -->
-						Markdown content
+					### Demo
+
+
+
+					1. PHP implementation<!-- .element: class="fragment" data-fragment-index="0" -->
+					2. Handy client<!-- .element: class="fragment" data-fragment-index="1" -->
+					<aside class="notes">
+						- Di cosa abbiamo bisogno per fare la demo?
+					</aside>
 					</script>
 				</section>
 			</div>

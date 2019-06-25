@@ -18,40 +18,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class GraphqlController extends AbstractController
 {
     /**
-     * @Route("/graphql/minimal", name="graphql_minimal")
+     * @Route("/graphql-minimal", name="graphql_minimal")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function minimal()
+    public function minimal(Request $request)
     {
-        $query = "query {
-            randomMovieTitle
-        }";
+        $data = json_decode($request->getContent(), true);
+        $query = $data['query'];
 
         $variableValues = null;
+
 
         $queryType = new ObjectType([
             'name' => 'Query',
             'fields' => [
-                'randomMovieTitle' => [
-                    'type' => Type::string(),
-                    'resolve' => function ($root, $args) {
-                        return 'Back to the future';
-                    }
-                ],
-                'movies' => [
-                    'type' => Type::listOf(new Movie()),
-//                    'args' => [
-//                        'title' => Type::nonNull(Type::string()),
-//                    ],
-                    'resolve' => function($a, $args) {
-                        // $args['title']
-                        return [
-                            [
-                                'id' => 1,
-                            ],
-                            [
-                                'id' => 2
-                            ]
-                        ];
+                'randomMovie' => [
+                    'type' => new Movie(),
+                    'resolve' => function () {
+                        return ['title' => 'Back to the Future'];
                     }
                 ]
             ],
