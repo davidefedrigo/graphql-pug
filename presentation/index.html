@@ -97,28 +97,31 @@
 					</script>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
-					<textarea data-template>
-							GraphQL Query
+					<script type="text/template">
+						GraphQL Query
 
-							```
-							{
-								randomMovie {
-									title
+						```
+						{
+							randomMovie {
+								title
+							}
+						}
+						```
+						
+						JSON Result
+						```
+						{
+							"data": {
+								"randomMovie": {
+									"title": "Back to the Future"
 								}
 							}
-							```
-							
-							JSON Result
-							```
-							{
-								"data": {
-									"randomMovie": {
-										"title": "Back to the Future"
-									}
-								}
-							}
-							```
-					</textarea>
+						}
+						```
+					</script>
+					<aside class="notes">
+						- Dove si pongono all'interno di una interazione client server?
+					</aside>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
