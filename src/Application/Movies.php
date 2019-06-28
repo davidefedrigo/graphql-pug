@@ -16,7 +16,7 @@ class Movies
         ];
     }
 
-    public function find($movieFilter, $sortOrder): array
+    public function find($sortOrder): array
     {
         return self::getAll();
     }

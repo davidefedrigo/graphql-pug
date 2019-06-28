@@ -181,6 +181,188 @@
 					</aside>
 					</script>
 				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### User Input
+
+					By using the type system, it can be predetermined whether a GraphQL query is valid or not
+					<aside data-markdown class="notes">
+						- *validare user input* attraverso il type checking
+						- contare su _layer_ davanti che si occupa della **validazione**
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### User Input Validation
+
+					```
+					query {
+						actors(matching: 1) {
+							name
+						}
+					}					
+					```
+
+					```
+{
+	"errors": [
+		{
+			"message": "Field \"actors\" argument \"matching\"
+			            requires type String!, found 1.",
+			"extensions": {
+				"category": "graphql"
+			},
+			"locations": [
+				{
+				    "line": 2,
+				    "column": 20
+				}
+			]
+		}
+	]
+}
+					```
+					<aside data-markdown class="notes">
+						
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### Field Arguments
+
+					A way for users to parameterize queries
+					```
+					query {
+						movies(year: 1985) {
+							title(language: "it")
+						}
+					}
+					```
+
+					```
+					{
+						"data": {
+							"movies": [
+								{
+									"title": "Ritorno al Futuro"
+								},
+								{
+									"title": "I Goonies"
+								}
+							]
+						}
+					}
+					```
+					<aside class="notes">
+						- to *provide input* to a specific field, to be used in their queries
+
+						- every field and *nested object* can get its own set of arguments
+
+						- good for making *multiple API fetches*
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					###### Providing Field Argument Values
+					### As Document Literals
+
+					```
+					query {
+						movies(year: 1985) {
+							title(language: "it")
+						}
+					}
+					```
+					<aside class="notes">
+						- Comodo per provare la query
+
+						- Non riutilizzabile:
+							- test: input valido vs inout non valido
+
+							- interfaccia utente con input di ricerca
+
+						- Rischio di documento malformato
+							- occorrre interpolare input nella query
+
+							- quindi validarlo/sanitizzarlo
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					###### Providing Field Argument Values
+					### As Variables
+
+					```
+					query ($year: Int, $language: String) {
+						movies(year: $year) {
+							title(language: $language)
+						}
+					}
+					```
+
+					```
+					{
+						"year": 1985,
+						"language": "it"
+					}
+					```
+					<aside class="notes">
+						- Il tipo viene validato
+
+						- Riutilizzabile:
+
+							- nei test
+
+							- lato client per usare input
+
+						- document GraphQL corretto
+
+						- TIP: se tipo errato nelle varibili, viene castato prima di passare all'engine della query
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### Using Enumeration Types
+
+					A GraphQL enum is a special type of scalar that has a defined, finite set of possible values.
+					```
+					query {
+						movies {
+							title(language: IT)
+						}
+					}
+					```
+
+					```
+					query ($language: Language) {
+						movies {
+							title(language: $language)
+						}
+					}
+					```
+
+					```
+					{
+						"language": "IT"
+					}
+					```
+					<aside class="notes">
+						- Enum è uno tipo speciale di scalar che ha 
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### Coding Session
+
+					(input object examples)
+					</script>
+				</section>
 			</div>
 		</div>
 

@@ -29,20 +29,20 @@ class Query extends ObjectType
                 'movies' => [
                     'type' => Type::listOf(TypeRegistry::movie()),
                     'args' => [
-                        'movieFilter' => Type::nonNull(new MovieFilter()),
+//                        'movieFilter' => new MovieFilter(),
                         'sortOrder' => Type::nonNull(new SortOrder())
                     ],
                     'resolve' => function($a, $args) {
-                        var_dump($args);
-                        return Movies::find($args['movieFilter'], $args['sortOrder']);
+                        return Movies::find($args['sortOrder']);
                     }
                 ],
                 'actors' => [
                     'type' => Type::listOf(TypeRegistry::actor()),
                     'args' => [
-                        'matching' => Type::string(),
+                        'matching' => Type::nonNull(Type::string()),
                     ],
                     'resolve' => function($a, $args) {
+                            var_dump($args['matching']);
                         return isset($args['matching']) ? Actors::getAllMatching($args['matching']) : Actors::getAll();
                     }
                 ],
