@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Building My First GraphQL Server in PHP</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -361,6 +361,60 @@
 					### Coding Session
 
 					(input object examples)
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### Abstract Types
+
+					```
+					query {
+						searchMovies(matching: "AAA") {
+							title
+							year
+							runningTime
+						}
+						searchTVSeries(matching: "AAA") {
+							title
+							seasons {
+								episodes {
+									runningTime
+								}
+							}
+						}
+					}
+					```
+					<aside class="notes">
+						- 
+					</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### Abstract Types
+
+					```
+					query {
+						search(matching: "AAA") {
+							... on Movie {
+								title
+								year
+								runningTime
+							}
+							... on TVSerie {
+								title
+								seasons {
+									episodes {
+									    runningTime
+									}
+								}
+							}
+						}
+					}
+					```
+					<aside class="notes">
+						- 
+					</aside>
 					</script>
 				</section>
 			</div>
