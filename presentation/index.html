@@ -51,7 +51,7 @@
 						### Disclaimer
 						Never done it before!
 
-						_(using PHP)_<!-- .element: class="fragment" data-fragment-index="0" -->
+						_(using PHP)_
 						<aside class="notes">
 							- Racconterò il mio percorso in PHP
 							</aside>
@@ -59,7 +59,7 @@
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<textarea data-template>
-						GraphQL has been released only as a specification.
+						GraphQL has been released only as a specification
 						<aside class="notes">
 							- Solo un lungo documento che descrive comportamento di un GL server.
 
@@ -365,13 +365,21 @@
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
+						### Abstract Types
+						<aside class="notes">
+							-
+						</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
 					### Abstract Types
 
+					What's the most common use case?
 					```
 					query {
 						searchMovies(matching: "AAA") {
 							title
-							year
 							runningTime
 						}
 						searchTVSeries(matching: "AAA") {
@@ -391,7 +399,18 @@
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
-					### Abstract Types
+						### Abstract Types
+
+						- Union Types
+						- Interfaces
+						<aside class="notes">
+							-
+						</aside>
+					</script>
+				</section>
+				<section data-markdown data-background-image="img/interna.jpg">
+					<script type="text/template">
+					### Using Abstract Types
 
 					```
 					query {
