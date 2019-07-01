@@ -173,7 +173,7 @@
 					<script type="text/template">
 					### Coding Session
 
-					(rough example)
+					Rough Example
 					<aside class="notes">
 						- Super base
 						- Tenuto volutamente tutto in un controller per vedere cosa basta avere
@@ -360,7 +360,7 @@
 					<script type="text/template">
 					### Coding Session
 
-					(input object examples)
+					Input Object Examples
 					</script>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
@@ -373,69 +373,200 @@
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
-					### Abstract Types
+          ```
+          type Query {
+            searchMovies(matching: String!): [Movie!]!
+            searchTVSeries(matching: String!): [TVSerie!]!
+          }
+          ```
 
-					What's the most common use case?
-					```
-					query {
-						searchMovies(matching: "AAA") {
-							title
-							runningTime
-						}
-						searchTVSeries(matching: "AAA") {
-							title
-							seasons {
-								episodes {
-									runningTime
-								}
-							}
-						}
-					}
-					```
-					<aside class="notes">
-						- 
-					</aside>
+          ```
+          query {
+            searchMovies(matching: "game") {
+              title
+              runningTime
+            }
+            searchTVSeries(matching: "game") {
+              title
+              seasons {
+                episodes {
+                  runningTime
+                }
+              }
+            }
+          }
+          ```
+          <!-- .element: class="fragment" data-fragment-index="1" -->
+
+          <aside class="notes">
+          - Necessità
+          - Risultato di un solo tipo
+          </aside>
 					</script>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
 					<script type="text/template">
-						### Abstract Types
+            ### Union Types
 
-						- Union Types
-						- Interfaces
+            _A GraphQL union type is an abstract type that represents a set of specific concrete types_
 						<aside class="notes">
 							-
 						</aside>
 					</script>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
-					<script type="text/template">
-					### Using Abstract Types
+          <script type="text/template">
+          ### Union Types
 
-					```
-					query {
-						search(matching: "AAA") {
-							... on Movie {
-								title
-								year
-								runningTime
-							}
-							... on TVSerie {
-								title
-								seasons {
-									episodes {
-									    runningTime
-									}
-								}
-							}
-						}
-					}
-					```
-					<aside class="notes">
-						- 
-					</aside>
+          ```
+          type Query {
+            searchMovies(matching: String!): [Movie!]!
+            searchTVSeries(matching: String!): [TVSerie!]!
+          }
+          ```
+
+          ```
+          type Query {
+            search(matching: String!): [SearchResult!]!
+          }
+
+          union SearchResult = Movie | TVSerie
+          ```
+          <aside class="notes">
+          - Confronto prima e dopo
+          </aside>
 					</script>
-				</section>
+        </section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+```
+query {
+  search(matching: "game") {
+    ... on Movie {
+      title
+      runningTime
+    }
+    ... on TVSerie {
+      title
+      seasons {
+        episodes {
+          runningTime
+        }
+      }
+    }
+  }
+}
+```
+<aside class="notes">
+-
+</aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+```
+{
+  "data": {
+    "search": [
+      {
+        "title": "Avengers: Endgame",
+        "runningTime": 181
+      },
+      {
+        "title": "Game of Thrones",
+        "seasons": [
+          {
+            "episodes": [
+              {
+                "runningTime": 62
+              },
+              {
+                "runningTime": 56
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+  <script type="text/template">
+    ### Interfaces
+
+    _An Interface is an abstract type that includes a certain set of fields that a type must include to implement the interface_
+    <aside class="notes">
+      -
+    </aside>
+  </script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+### Interfaces
+
+```
+interface BasicSearchResult {
+  title: String!
+}
+
+type Movie implements BasicSearchResult {
+  title: String!
+  runningTime: Int
+}
+
+type TVSerie implements BasicSearchResult {
+  title: String!
+  seasons: [Season!]!
+}
+```
+<aside class="notes">
+- 
+</aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+```
+query {
+  search(matching: "game") {
+      title
+    }
+  }
+}
+```
+
+```
+{
+  "data": {
+    "search": [
+      {
+        "title": "Avengers: Endgame"
+      },
+      {
+        "title": "Game of Thrones"
+      }
+    ]
+  }
+}
+```
+<aside class="notes">
+- Torna ad essere molto semplice, poco rumore
+</aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+  <script type="text/template">
+  ### Coding Session
+
+  Abstract Types Examples
+  </script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+  <script type="text/template">
+  ### Operations
+  </script>
+</section>
 			</div>
 		</div>
 
