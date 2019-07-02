@@ -371,72 +371,72 @@
 						</aside>
 					</script>
 				</section>
-				<section data-markdown data-background-image="img/interna.jpg">
-					<script type="text/template">
-          ```
-          type Query {
-            searchMovies(matching: String!): [Movie!]!
-            searchTVSeries(matching: String!): [TVSerie!]!
-          }
-          ```
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+```
+type Query {
+  searchMovies(matching: String!): [Movie!]!
+  searchTVSeries(matching: String!): [TVSerie!]!
+}
+```
 
-          ```
-          query {
-            searchMovies(matching: "game") {
-              title
-              runningTime
-            }
-            searchTVSeries(matching: "game") {
-              title
-              seasons {
-                episodes {
-                  runningTime
-                }
-              }
-            }
-          }
-          ```
-          <!-- .element: class="fragment" data-fragment-index="1" -->
+```
+query {
+  searchMovies(matching: "game") {
+    title
+    runningTime
+  }
+  searchTVSeries(matching: "game") {
+    title
+    seasons {
+      episodes {
+        runningTime
+      }
+    }
+  }
+}
+```
+<!-- .element: class="fragment" data-fragment-index="1" -->
 
-          <aside class="notes">
-          - Necessità
-          - Risultato di un solo tipo
-          </aside>
-					</script>
-				</section>
-				<section data-markdown data-background-image="img/interna.jpg">
-					<script type="text/template">
-            ### Union Types
+<aside class="notes">
+- Necessità
+- Risultato di un solo tipo
+</aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+  ### Union Types
 
-            _A GraphQL union type is an abstract type that represents a set of specific concrete types_
-						<aside class="notes">
-							-
-						</aside>
-					</script>
-				</section>
-				<section data-markdown data-background-image="img/interna.jpg">
-          <script type="text/template">
-          ### Union Types
+  _A GraphQL union type is an abstract type that represents a set of specific concrete types_
+  <aside class="notes">
+    -
+  </aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+### Union Types
 
-          ```
-          type Query {
-            searchMovies(matching: String!): [Movie!]!
-            searchTVSeries(matching: String!): [TVSerie!]!
-          }
-          ```
+```
+type Query {
+  searchMovies(matching: String!): [Movie!]!
+  searchTVSeries(matching: String!): [TVSerie!]!
+}
+```
 
-          ```
-          type Query {
-            search(matching: String!): [SearchResult!]!
-          }
+```
+type Query {
+  search(matching: String!): [SearchResult!]!
+}
 
-          union SearchResult = Movie | TVSerie
-          ```
-          <aside class="notes">
-          - Confronto prima e dopo
-          </aside>
-					</script>
-        </section>
+union SearchResult = Movie | TVSerie
+```
+<aside class="notes">
+- Confronto prima e dopo
+</aside>
+</script>
+</section>
 <section data-markdown data-background-image="img/interna.jpg">
 <script type="text/template">
 ```
@@ -563,9 +563,110 @@ query {
   </script>
 </section>
 <section data-markdown data-background-image="img/interna.jpg">
-  <script type="text/template">
-  ### Operations
-  </script>
+<script type="text/template">
+### Operations
+<aside class="notes">
+- Query
+
+- Mutation
+
+- Subscription
+</aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+### Mutations
+
+```
+type Mutation {
+  rateMovie(movieId: Int!, stars: Int!, comment: String): MovieReview
+}
+
+type MovieReview {
+  movie: Movie!
+  stars: Int!
+  comment: String
+}
+```
+<aside class="notes">
+- Per convenzione, ogni richiesta che causa side-effect, che modifica dati
+
+- root mutation type
+
+- Solitamente le mutation che creano qualcosa, lo ritornano come risultato del campo
+
+- possiamo richiedere determinati campi
+</aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+#### Modeling Input Objects
+
+```
+type Mutation {
+  rateMovie(movieId: Int!, review: ReviewInput!): MovieReview
+  rateTVSerie(tvSerieId: Int!, review: ReviewInput!): TvSerieReview
+}
+
+input ReviewInput {
+  stars: Int!
+  comment: String
+}
+
+type MovieReview {
+  movie: Movie!
+  stars: Int!
+  comment: String
+}
+
+type TvSerieReview {
+  tvSerie: TvSerie!
+  stars: Int!
+  comment: String
+}
+```
+<aside class="notes">
+- WatchlistItem potrebbe essere una union di Movie e TVSeries
+</aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+```
+mutation($movieId: Int!, $review: ReviewInput!) {
+  rateMovie(movieId: $movieId, review: $review) {
+    movie {
+      title
+      stars
+    }
+    stars
+  }
+}
+```
+
+```
+{"movieId": 1, "review": {"stars": 5, "comment": "Awesome!"}}
+```
+
+```
+{
+  "data": {
+    "rateMovie": {
+      "movie": {
+        "title": "Avengers: Endgame",
+        "stars": 4.2
+      },
+      "stars": 5
+    }
+  }
+}
+```
+<aside class="notes">
+- 
+</aside>
+</script>
 </section>
 			</div>
 		</div>
