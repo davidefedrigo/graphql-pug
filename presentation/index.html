@@ -330,7 +330,7 @@
 					### Using Enumeration Types
 
 					A GraphQL enum is a special type of scalar that has a defined, finite set of possible values.
-					```
+					```graphql
 					query {
 						movies {
 							title(language: IT)
@@ -338,7 +338,7 @@
 					}
 					```
 
-					```
+					```graphql
 					query ($language: Language) {
 						movies {
 							title(language: $language)
@@ -346,7 +346,7 @@
 					}
 					```
 
-					```
+					```js
 					{
 						"language": "IT"
 					}
@@ -373,14 +373,14 @@
 				</section>
 <section data-markdown data-background-image="img/interna.jpg">
 <script type="text/template">
-```
+```graphql
 type Query {
-  searchMovies(matching: String!): [Movie!]!
-  searchTVSeries(matching: String!): [TVSerie!]!
+  searchMovies(matching: String!): [ Movie! ]!
+  searchTVSeries(matching: String!): [ TVSerie! ]!
 }
 ```
 
-```
+```graphql
 query {
   searchMovies(matching: "game") {
     title
@@ -418,16 +418,16 @@ query {
 <script type="text/template">
 ### Union Types
 
-```
+```graphql
 type Query {
-  searchMovies(matching: String!): [Movie!]!
-  searchTVSeries(matching: String!): [TVSerie!]!
+  searchMovies(matching: String!): [ Movie! ]!
+  searchTVSeries(matching: String!): [ TVSerie! ]!
 }
 ```
 
-```
+```graphql
 type Query {
-  search(matching: String!): [SearchResult!]!
+  search(matching: String!): [ SearchResult! ]!
 }
 
 union SearchResult = Movie | TVSerie
@@ -634,7 +634,7 @@ type TvSerieReview {
 </section>
 <section data-markdown data-background-image="img/interna.jpg">
 <script type="text/template">
-```
+```graphql
 mutation($movieId: Int!, $review: ReviewInput!) {
   rateMovie(movieId: $movieId, review: $review) {
     movie {
@@ -646,11 +646,11 @@ mutation($movieId: Int!, $review: ReviewInput!) {
 }
 ```
 
-```
+```js
 {"movieId": 1, "review": {"stars": 5, "comment": "Awesome!"}}
 ```
 
-```
+```js
 {
   "data": {
     "rateMovie": {
