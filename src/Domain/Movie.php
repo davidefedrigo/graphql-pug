@@ -12,7 +12,12 @@ class Movie
     /**
      * @var string
      */
-    public $title;
+    public $italianTitle;
+
+    /**
+     * @var string
+     */
+    public $englishTitle;
 
     /**
      * @var string
@@ -32,33 +37,63 @@ class Movie
     /**
      * Movie constructor.
      * @param $id
-     * @param string $title
+     * @param $englishTitle
+     * @param $italianTitle
      * @param int $year
+     * @internal param string $title
      */
-    private function __construct($id, $title, $year)
+    private function __construct($id, $englishTitle, $italianTitle, $year)
     {
         $this->id = $id;
-        $this->title = $title;
+        $this->englishTitle = $englishTitle;
+        $this->italianTitle = $italianTitle;
         $this->year = $year;
     }
 
     /**
      * @param $id
-     * @param $title
+     * @param $englishTitle
+     * @param $italianTitle
      * @param $year
      * @return Movie
+     * @internal param $title
      */
-    public static function create($id, $title, $year): self
+    public static function create($id, $englishTitle, $italianTitle, $year): self
     {
-        return new self($id, $title, $year);
+        return new self($id, $englishTitle, $italianTitle, $year);
+    }
+
+    /**
+     * @param string $language
+     * @return string
+     */
+    public function getTitle(string $language) : string
+    {
+        switch ($language) {
+            case 'it':
+                $title = $this->getItalianTitle();
+                break;
+            default:
+                $title = $this->getEnglishTitle();
+        }
+
+        return $title;
     }
 
     /**
      * @return string
      */
-    public function getTitle() : string
+    public function getItalianTitle() : string
     {
-        return $this->title;
+        return $this->italianTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnglishTitle() : string
+    {
+        return $this->englishTitle;
     }
 
     /**

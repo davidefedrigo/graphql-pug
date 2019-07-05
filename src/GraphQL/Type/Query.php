@@ -29,11 +29,10 @@ class Query extends ObjectType
                 'movies' => [
                     'type' => Type::listOf(TypeRegistry::movie()),
                     'args' => [
-//                        'movieFilter' => new MovieFilter(),
-                        'sortOrder' => Type::nonNull(new SortOrder())
+                        'year' => Type::int()
                     ],
                     'resolve' => function($a, $args) {
-                        return Movies::find($args['sortOrder']);
+                        return Movies::find(isset($args['year']) ? $args['year'] : null);
                     }
                 ],
                 'actors' => [

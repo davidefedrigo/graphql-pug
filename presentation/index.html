@@ -39,11 +39,6 @@
 							- Tooling
 							- Meet GraphQL
 
-							- Demo Project
-								- Batch (n+1)<!-- .element: class="fragment" data-fragment-index="0" -->
-								- Authentication<!-- .element: class="fragment" data-fragment-index="1" -->
-								- Error handling<!-- .element: class="fragment" data-fragment-index="2" -->
-								- Testing<!-- .element: class="fragment" data-fragment-index="3" -->
 						</script>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
@@ -173,7 +168,7 @@
 					<script type="text/template">
 					### Coding Session
 
-					Rough Example
+					Minimal Example
 					<aside class="notes">
 						- Super base
 						- Tenuto volutamente tutto in un controller per vedere cosa basta avere
@@ -296,7 +291,7 @@
 					###### Providing Field Argument Values
 					### As Variables
 
-					```
+					```graphql
 					query ($year: Int, $language: String) {
 						movies(year: $year) {
 							title(language: $language)
@@ -304,7 +299,7 @@
 					}
 					```
 
-					```
+					```json
 					{
 						"year": 1985,
 						"language": "it"
@@ -360,7 +355,7 @@
 					<script type="text/template">
 					### Coding Session
 
-					Input Object Examples
+					User Input Examples
 					</script>
 				</section>
 				<section data-markdown data-background-image="img/interna.jpg">
@@ -439,14 +434,14 @@ union SearchResult = Movie | TVSerie
 </section>
 <section data-markdown data-background-image="img/interna.jpg">
 <script type="text/template">
-```
+```graphql
 query {
   search(matching: "game") {
     ... on Movie {
       title
       runningTime
     }
-    ... on TVSerie {
+    ... on TvSerie {
       title
       seasons {
         episodes {
@@ -666,6 +661,18 @@ mutation($movieId: Int!, $review: ReviewInput!) {
 <aside class="notes">
 - 
 </aside>
+</script>
+</section>
+<section data-markdown data-background-image="img/interna.jpg">
+<script type="text/template">
+	### Additional Interesting Topics
+
+	- Errors and exceptions<!-- .element: class="fragment" data-fragment-index="0" -->
+	- Keep resolvers and domain logic separated<!-- .element: class="fragment" data-fragment-index="1" -->
+	- N+1 problem<!-- .element: class="fragment" data-fragment-index="2" -->
+	- Authentication<!-- .element: class="fragment" data-fragment-index="3" -->
+	- Testing<!-- .element: class="fragment" data-fragment-index="4" -->
+	- Custom Scalar Types<!-- .element: class="fragment" data-fragment-index="5" -->
 </script>
 </section>
 			</div>
