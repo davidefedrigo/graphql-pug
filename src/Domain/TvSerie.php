@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-class Movie
+class TvSerie
 {
     /**
      * @var int
@@ -20,54 +20,37 @@ class Movie
     private $englishTitle;
 
     /**
-     * @var int
+     * @var Season[]
      */
-    private $runningTime;
-    /**
-     * @var string
-     */
-    private $description;
-
-    /**
-     * @var int
-     */
-    private $year;
-
-    /**
-     * @var Actor[]
-     */
-    private $actors;
+    private $seasons;
 
     /**
      * Movie constructor.
      * @param $id
      * @param $englishTitle
      * @param $italianTitle
-     * @param int $year
-     * @param $runningTime
+     * @param array $seasons
      * @internal param string $title
      */
-    private function __construct($id, $englishTitle, $italianTitle, $year, $runningTime)
+    private function __construct($id, $englishTitle, $italianTitle, $seasons)
     {
         $this->id = $id;
         $this->englishTitle = $englishTitle;
         $this->italianTitle = $italianTitle;
-        $this->year = $year;
-        $this->runningTime = $runningTime;;
+        $this->seasons = $seasons;
     }
 
     /**
      * @param $id
      * @param $englishTitle
      * @param $italianTitle
-     * @param $year
-     * @param $runningTime
-     * @return Movie
+     * @param $seasons
+     * @return TvSerie
      * @internal param $title
      */
-    public static function create($id, $englishTitle, $italianTitle, $year, $runningTime): self
+    public static function create($id, $englishTitle, $italianTitle, $seasons): self
     {
-        return new self($id, $englishTitle, $italianTitle, $year, $runningTime);
+        return new self($id, $englishTitle, $italianTitle, $seasons);
     }
 
     /**
@@ -104,34 +87,10 @@ class Movie
     }
 
     /**
-     * @return string
+     * @return Season[]
      */
-    public function getDescription(): string
+    public function getSeasons(): array
     {
-        return $this->description;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRunningTime(): int
-    {
-        return $this->runningTime;
-    }
-
-    /**
-     * @return int
-     */
-    public function getYear(): int
-    {
-        return $this->year;
-    }
-
-    /**
-     * @return Actor[]
-     */
-    public function getActors(): array
-    {
-        return $this->actors;
+        return $this->seasons;
     }
 }

@@ -4,13 +4,13 @@ namespace App\GraphQL\Type;
 
 use App\Application\Actors;
 use App\Domain\Language;
-use App\GraphQL\Resolver\MovieResolver;
+use App\GraphQL\Resolver\TvSerieResolver;
 use App\GraphQL\Type\Enum\Language as LanguageType;
 use App\GraphQL\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
-class Movie extends ObjectType
+class TvSerie extends ObjectType
 {
     public function __construct()
     {
@@ -22,18 +22,12 @@ class Movie extends ObjectType
                     'args' => [
                         'language' => TypeRegistry::language()
                     ],
-                    'resolve' => MovieResolver::title()
+                    'resolve' => TvSerieResolver::title()
                 ],
-                'runningTime' => [
-                    'type' => Type::int(),
-                    'resolve' => function(\App\Domain\Movie $movie) {
-                        return $movie->getRunningTime();
-                    }
-                ],
-                'actors' => [
-                    'type' => Type::listOf(TypeRegistry::actor()),
-                    'resolve' => function($movie, $args) {
-                        return Actors::findByMovie($movie);
+                'seasons' => [
+                    'type' => Type::listOf(TypeRegistry::season()),
+                    'resolve' => function(\App\Domain\TvSerie $tvserie) {
+                        return $tvserie->getSeasons();
                     }
                 ],
             ],
