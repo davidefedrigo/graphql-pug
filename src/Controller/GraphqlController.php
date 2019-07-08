@@ -26,6 +26,7 @@ class GraphqlController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
+        // -----
         $movieType = new ObjectType([
             'name' => 'Movie',
             'description' => 'Hi, I\'m a movie',
@@ -42,7 +43,7 @@ class GraphqlController extends AbstractController
             'name' => 'Query',
             'fields' => [
                 'randomMovie' => [
-                    'type' => $movieType,
+                    'type' => Type::nonNull($movieType),
                     'description' => 'Just give me a movie for tonight',
                     'resolve' => function () {
                         return [
@@ -57,6 +58,9 @@ class GraphqlController extends AbstractController
         $schema = new \GraphQL\Type\Schema([
             'query' => $queryType
         ]);
+
+        // ---------------
+
 
         try {
             $result = GraphQL::executeQuery($schema, $data['query'], null, null, null);
