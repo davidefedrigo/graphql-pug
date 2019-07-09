@@ -9,13 +9,13 @@ use App\GraphQL\Type\Episode;
 use App\GraphQL\Type\Movie;
 use App\GraphQL\Type\SearchResult;
 use App\GraphQL\Type\Season;
-use App\GraphQL\Type\TvSerie;
+use App\GraphQL\Type\TvSeries;
 
 class TypeRegistry
 {
     private static $actor;
     private static $movie;
-    private static $tvSerie;
+    private static $tvSeries;
     private static $season;
     private static $episode;
     private static $director;
@@ -27,9 +27,9 @@ class TypeRegistry
         return self::$movie ?: (self::$movie = new Movie());
     }
 
-    public static function tvSerie()
+    public static function tvSeries()
     {
-        return self::$tvSerie ?: (self::$tvSerie = new TvSerie());
+        return self::$tvSeries ?: (self::$tvSeries = new TvSeries());
     }
 
     public static function season()

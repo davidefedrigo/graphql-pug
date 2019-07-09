@@ -2,15 +2,12 @@
 
 namespace App\GraphQL\Type;
 
-use App\Application\Actors;
-use App\Domain\Language;
-use App\GraphQL\Resolver\TvSerieResolver;
-use App\GraphQL\Type\Enum\Language as LanguageType;
+use App\GraphQL\Resolver\TvSeriesResolver;
 use App\GraphQL\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
-class TvSerie extends ObjectType
+class TvSeries extends ObjectType
 {
     public function __construct()
     {
@@ -22,12 +19,12 @@ class TvSerie extends ObjectType
                     'args' => [
                         'language' => TypeRegistry::language()
                     ],
-                    'resolve' => TvSerieResolver::title()
+                    'resolve' => TvSeriesResolver::title()
                 ],
                 'seasons' => [
                     'type' => Type::listOf(TypeRegistry::season()),
-                    'resolve' => function(\App\Domain\TvSerie $tvserie) {
-                        return $tvserie->getSeasons();
+                    'resolve' => function(\App\Domain\TvSeries $tvSeries) {
+                        return $tvSeries->getSeasons();
                     }
                 ],
             ],

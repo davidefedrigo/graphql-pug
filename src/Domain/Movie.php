@@ -134,4 +134,12 @@ class Movie
     {
         return $this->actors;
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

@@ -31,7 +31,7 @@ class Actors
     public static function findByMovie(Movie $movie): array
     {
         return F\filter(self::getAll(), function(Actor $actor) use ($movie) {
-            return in_array($movie->id, $actor->movieIds, true);
+            return in_array($movie->getId(), $actor->movieIds, true);
         });
     }
 }

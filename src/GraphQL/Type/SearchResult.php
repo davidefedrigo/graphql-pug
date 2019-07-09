@@ -3,7 +3,7 @@
 namespace App\GraphQL\Type;
 
 use App\Domain\Movie;
-use App\Domain\TvSerie;
+use App\Domain\TvSeries;
 use App\GraphQL\TypeRegistry;
 use GraphQL\Type\Definition\UnionType;
 
@@ -14,13 +14,13 @@ class SearchResult extends UnionType
         $config = [
             'types' => [
                 TypeRegistry::movie(),
-                TypeRegistry::tvSerie()
+                TypeRegistry::tvSeries()
             ],
             'resolveType' => function($value) {
                 if ($value instanceof Movie) {
                     return TypeRegistry::movie();
-                } elseif ($value instanceof TvSerie) {
-                    return TypeRegistry::tvSerie();
+                } elseif ($value instanceof TvSeries) {
+                    return TypeRegistry::tvSeries();
                 }
             }
         ];

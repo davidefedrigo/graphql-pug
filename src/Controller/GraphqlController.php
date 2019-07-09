@@ -24,46 +24,9 @@ class GraphqlController extends AbstractController
      */
     public function inline(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-
-        // -----
-        $movieType = new ObjectType([
-            'name' => 'Movie',
-            'description' => 'Hi, I\'m a movie',
-            'fields' => [
-                'id' => Type::ID(),
-                'title' => [
-                    'type' => Type::string(),
-                    'description' => 'Movie title'
-                ]
-            ]
-        ]);
-
-        $queryType = new ObjectType([
-            'name' => 'Query',
-            'fields' => [
-                'randomMovie' => [
-                    'type' => Type::nonNull($movieType),
-                    'description' => 'Just give me a movie for tonight',
-                    'resolve' => function () {
-                        return [
-                            'id' => 1,
-                            'title' => 'Back to the Future'
-                        ];
-                    }
-                ]
-            ],
-        ]);
-
-        $schema = new \GraphQL\Type\Schema([
-            'query' => $queryType
-        ]);
-
-        // ---------------
-
-
         try {
-            $result = GraphQL::executeQuery($schema, $data['query'], null, null, null);
+            $data = json_decode($request->getContent(), true);
+            $result = GraphQL::executeQuery($this->getSchema(), $data['query'], null, null, null);
             $output = $result->toArray();
         } catch (\Exception $e) {
             $output = [
@@ -77,6 +40,48 @@ class GraphqlController extends AbstractController
 
 
         return $this->json($output);
+    }
+
+    /**
+     * @return \GraphQL\Type\Schema
+     */
+    private function getSchema()
+    {
+        $movieType = new ObjectType([
+            'name' => 'Movie',
+            'description' => 'Hi, I\'m a movie',
+            'fields' => [
+                'id' => Type::nonNull(Type::int()),
+                'title' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'description' => 'Movie title'
+                ]
+            ]
+        ]);
+
+        $queryType = new ObjectType([
+            'name' => 'Query',
+            'fields' => [
+                'randomMovie' => [
+                    'type' => $movieType,
+                    'description' => 'Just give me a movie for tonight',
+                    'resolve' => function () {
+                        $movies = [
+                            ['id' => 1, 'title' => 'Back to the Future'],
+                            ['id' => 2, 'title' => 'Spider-Man'],
+                            ['id' => 3, 'title' => 'Avengers: Endgame'],
+                            null
+                        ];
+
+                        return $movies[rand(0, 3)];
+                    }
+                ]
+            ],
+        ]);
+
+        return new \GraphQL\Type\Schema([
+            'query' => $queryType
+        ]);
     }
 
     /**

@@ -2,18 +2,18 @@
 
 namespace App\GraphQL\Resolver;
 
-use App\Domain\TvSerie;
+use App\Domain\TvSeries;
 use App\GraphQL\Type\Enum\Language;
 
-class TvSerieResolver
+class TvSeriesResolver
 {
     public static function title() {
-        return function (TvSerie $tvSerie, $args) {
+        return function (TvSeries $tvSeries, $args) {
             $language = isset($args['language']) ? $args['language'] : null;
             if ($language === Language::ITALIAN) {
-                $title = $tvSerie->getItalianTitle();
+                $title = $tvSeries->getItalianTitle();
             } else {
-                $title = $tvSerie->getEnglishTitle();
+                $title = $tvSeries->getEnglishTitle();
             }
 
             return $title;

@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-class TvSerie
+class TvSeries
 {
     /**
      * @var int
@@ -45,7 +45,7 @@ class TvSerie
      * @param $englishTitle
      * @param $italianTitle
      * @param $seasons
-     * @return TvSerie
+     * @return TvSeries
      * @internal param $title
      */
     public static function create($id, $englishTitle, $italianTitle, $seasons): self
